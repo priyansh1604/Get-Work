@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
+
 public class UserLoginDTO {
     public String getPassword() {
         return password;
