@@ -1,10 +1,12 @@
 package com.example.Freelance.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -36,7 +38,82 @@ public class Job {
 
     @ManyToOne
     @JoinColumn(name = "posted_by", nullable = false)
+    @JsonIgnoreProperties({"email", "password", "role",})
     private User postedBy;
+
+    @Column(name = "posted_date")
+    private LocalDate postedDate = LocalDate.now();
+
+    @Column(name = "deadline")
+    private LocalDate deadline;
+
+    private String locationPreference = "Remote";  // Default to Remote
+
+    private String experienceLevel;
+
+    private String estimatedDuration;
+
+    private Boolean isFeatured = false;
+
+    private Boolean requiresProposal = true;
+
+
+
+    public String getLocationPreference() {
+        return locationPreference;
+    }
+
+    public void setLocationPreference(String locationPreference) {
+        this.locationPreference = locationPreference;
+    }
+
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
+
+    public LocalDate getPostedDate() {
+        return postedDate;
+    }
+
+    public void setPostedDate(LocalDate postedDate) {
+        this.postedDate = postedDate;
+    }
+
+    public String getExperienceLevel() {
+        return experienceLevel;
+    }
+
+    public void setExperienceLevel(String experienceLevel) {
+        this.experienceLevel = experienceLevel;
+    }
+
+    public String getEstimatedDuration() {
+        return estimatedDuration;
+    }
+
+    public void setEstimatedDuration(String estimatedDuration) {
+        this.estimatedDuration = estimatedDuration;
+    }
+
+    public Boolean getFeatured() {
+        return isFeatured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        isFeatured = featured;
+    }
+
+    public Boolean getRequiresProposal() {
+        return requiresProposal;
+    }
+
+    public void setRequiresProposal(Boolean requiresProposal) {
+        this.requiresProposal = requiresProposal;
+    }
 
     public Long getId() {
         return id;

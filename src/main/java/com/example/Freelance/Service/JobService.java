@@ -32,13 +32,24 @@ public class JobService {
 
     public Job updateJob(Long id, Job updatedJob) {
         Job existingJob = getJobById(id);
-        existingJob.setTitle(updatedJob.getTitle());
-        existingJob.setDescription(updatedJob.getDescription());
-        existingJob.setBudget(updatedJob.getBudget());
-        existingJob.setCategory(updatedJob.getCategory());
-        existingJob.setSkillsRequired(updatedJob.getSkillsRequired());
-        existingJob.setStatus(updatedJob.getStatus());
-
+        if (updatedJob.getTitle() != null) {
+            existingJob.setTitle(updatedJob.getTitle());
+        }
+        if (updatedJob.getDescription() != null) {
+            existingJob.setDescription(updatedJob.getDescription());
+        }
+        if (updatedJob.getBudget() != null) {
+            existingJob.setBudget(updatedJob.getBudget());
+        }
+        if (updatedJob.getCategory() != null) {
+            existingJob.setCategory(updatedJob.getCategory());
+        }
+        if (updatedJob.getSkillsRequired() != null && !updatedJob.getSkillsRequired().isEmpty()) {
+            existingJob.setSkillsRequired(updatedJob.getSkillsRequired());
+        }
+        if (updatedJob.getStatus() != null) {
+            existingJob.setStatus(updatedJob.getStatus());
+        }
         return jobRepository.save(existingJob);
     }
 

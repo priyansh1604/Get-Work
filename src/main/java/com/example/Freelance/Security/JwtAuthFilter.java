@@ -34,6 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
 
         if (token == null || !token.startsWith("Bearer ")) {
+
             if (isPublicEndpoint(request)) {
                 filterChain.doFilter(request, response);
                 return;
@@ -41,11 +42,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"message\":\"Token is required\"}");
+
             return;
         }
         token = token.substring(7);
+
         try {
-            // Extract username from the token
             String username = jwtUtil.extractUsername(token);
             String role= jwtUtil.extractRole(token);
 
