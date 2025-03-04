@@ -42,7 +42,7 @@ public class JobController {
         return new ResponseEntity<>(new ApiResponse("Job created successfully"), HttpStatus.CREATED);
     }
 
-    @GetMapping("get-all-jobs")
+    @GetMapping("/get-all-jobs")
     public ResponseEntity<List<Job>> getAllJobs() {
         List<Job> jobs = jobService.getAllJobs();
         return ResponseEntity.ok(jobs);
